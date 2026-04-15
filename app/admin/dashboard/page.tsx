@@ -114,7 +114,7 @@ export default function AdminDashboard() {
     dateDebut: '2026-05-01',
     dateFin: '2026-05-30',
     description: 'Tournoi officiel de football',
-    reglementPDF: null as File | null,
+    reglementPDF: null as string | null,
   });
 
   // État équipes
@@ -397,7 +397,8 @@ export default function AdminDashboard() {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       if (file.type === 'application/pdf') {
-        setCompetition({ ...competition, reglementPDF: URL.createObjectURL(file) });
+        const fileUrl = URL.createObjectURL(file);
+        setCompetition({ ...competition, reglementPDF: fileUrl });
         alert('✅ Règlement PDF uploadé avec succès !');
       } else {
         alert('❌ Veuillez sélectionner un fichier PDF valide');
